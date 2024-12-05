@@ -115,7 +115,7 @@ module Resque
     case server
     when String
       if server =~ /rediss?\:\/\//
-        redis = Redis.new(:url => server)
+        redis = Redis.new(:url => server, ssl: server =~ /rediss\:\/\// ? true : false)
       else
         server, namespace = server.split('/', 2)
         host, port, db = server.split(':')
